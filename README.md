@@ -197,6 +197,31 @@ Model.counterReset('inhabitants_id',{country: 'France', city: 'Paris'}, function
 });
 ```
 
+
+### Decrement a counter by one
+
+It's possible to programmatically decrement a counter through the Model static method `decrementByOneCounter(id, reference, callback)`. The method take those parameters:
+
+- **id**: the counter to reset. It's mandatory
+- **reference**: Let you reset only a specific reference of the counter, if the counter has referenced fields. Optional. By default it reset all the counters for the `id`
+- **callback**: A callback which receive an error in case of any. Mandatory
+
+Some examples
+
+
+```js
+Model.decrementByOneCounter('counter_id', function(err) {
+    // Now the counter is 0
+});
+
+Model.decrementByOneCounter('inhabitants_id', function(err) {
+    // If this is a referenced fields, now all the counter are 0
+});
+
+Model.decrementByOneCounter('inhabitants_id',{country: 'France', city: 'Paris'}, function(err) {
+    // If this is a referenced fields, only the counter for Paris/France is 0
+});
+
 ### Options
 
 This plugin accept a series of options.
